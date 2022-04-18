@@ -1,16 +1,19 @@
 package library;
 
+import books.Readable;
+import exception.NotEnoughBooksException;
+
 import java.util.ArrayList;
 import java.util.HashSet;
 
 public class Library {
 
     private String name;
-    private ArrayList<Rooms> roomsArrayList = new ArrayList<>();
-    private HashSet<Readables> booksHashSet = new HashSet<>();
+    private ArrayList<Room> roomsArrayList = new ArrayList<>();
+    private HashSet<Readable> booksHashSet = new HashSet<>();
     private ArrayList<Personal> personalArrayList = new ArrayList<>();
 
-    Library(String name) {
+    public Library(String name) {
         if (name != null && !(name.equals(""))) {
             this.name = name;
         }
@@ -26,27 +29,27 @@ public class Library {
         }
     }
 
-    public ArrayList<Rooms> getRoomsArrayList() {
+    public ArrayList<Room> getRoomsArrayList() {
         return roomsArrayList;
     }
 
-    public void setRoomsArrayList(ArrayList<Rooms> roomsArrayList) {
+    public void setRoomsArrayList(ArrayList<Room> roomsArrayList) {
         this.roomsArrayList = roomsArrayList;
     }
 
-    public void addToArrayListRooms(Rooms s) {
+    public void addToArrayListRooms(Room s) {
         this.roomsArrayList.add(s);
     }
 
-    public HashSet<Readables> getBooksHashSet() {
+    public HashSet<Readable> getBooksHashSet() {
         return booksHashSet;
     }
 
-    public void setBooksHashSet(HashSet<Readables> booksHashSet) {
+    public void setBooksHashSet(HashSet<Readable> booksHashSet) {
         this.booksHashSet = booksHashSet;
     }
 
-    public void addToHashSetBooks(Readables s) {
+    public void addToHashSetBooks(Readable s) {
         this.booksHashSet.add(s);
     }
 
@@ -62,12 +65,12 @@ public class Library {
         this.personalArrayList.add(s);
     }
 
-    void removeAReadable(Readables readables) throws NotEnoughBooksException{
+    public void removeAReadable(Readable readable) throws NotEnoughBooksException {
         try {
             if (this.getBooksHashSet() == null) {
                 throw new NotEnoughBooksException("The library doesn't have any books left");
             }
-            this.getBooksHashSet().remove(readables);
+            this.getBooksHashSet().remove(readable);
         } catch (NotEnoughBooksException e) {
             e.printStackTrace();
         }
